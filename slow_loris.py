@@ -30,7 +30,7 @@ async def slow_loris(address, random_sleep=lambda: 1.5):
 async def main(address, loris_count):
     lorises = [
         asyncio.create_task(
-            slow_loris(address, partial(random.gauss, mu=5, sigma=0.5))
+            slow_loris(address, partial(random.gauss, mu=20, sigma=2))
         )
         for _ in range(loris_count)
     ]
