@@ -4,7 +4,7 @@ import asyncio
 def retry(on: Exception, retries: int):
     def wrapper(fn):
         async def wrapped(*args, **kwargs):
-            for _ in range(3):
+            for _ in range(retries):
                 try:
                     await fn(*args, **kwargs)
                 except on:
