@@ -70,7 +70,13 @@ if __name__ == '__main__':
         default=4,
         help='Number of lorises to connect to the server',
     )
+    parser.add_argument(
+        '--sleep',
+        type=float,
+        default=20,
+        help='Average time spent between sending keep-alive headers',
+    )
     args = parser.parse_args()
 
     address = (args.host, args.port)
-    asyncio.run(main(address, args.loris_count, 20))
+    asyncio.run(main(address, args.loris_count, args.sleep))
