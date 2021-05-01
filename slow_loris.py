@@ -9,6 +9,10 @@ from fake_useragent import UserAgent
 
 from utils import retry
 
+
+# Initialize fake user agent object at the top level because
+# initializing it talks to some online user agent database or
+# to the file system.
 USER_AGENT = UserAgent()
 
 
@@ -44,8 +48,8 @@ async def slow_loris(address: tuple[str, int], mean_sleep: float) -> None:
 
 
 async def main(
-    address: tuple[str, int], 
-    loris_count: int, 
+    address: tuple[str, int],
+    loris_count: int,
     mean_sleep: float=20,
 ) -> None:
     lorises = [
